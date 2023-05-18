@@ -12,8 +12,8 @@ module "upstream-cluster" {
 
   prefix = var.prefix
   instance_count = var.instance_count
-  instance_ssh_key_name = "leodotcloud"
-  ssh_private_key_path = "~/.ssh/id_ed25519"
+  instance_ssh_key_name = var.instance_ssh_key_name
+  ssh_private_key_path = var.ssh_private_key_path
   #  should_create_security_group = false
 }
 
@@ -22,7 +22,7 @@ module "rke" {
   depends_on = [module.upstream-cluster]
 
   node_username = "ubuntu"
-  ssh_private_key_pem = "~/.ssh/id_ed25519"
+  ssh_private_key_pem = var.ssh_private_key_path
 
   rancher_nodes = [for instance_ips in module.upstream-cluster.instances_ips:
     {

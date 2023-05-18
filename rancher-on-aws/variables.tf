@@ -31,3 +31,13 @@ variable "instance_count" {
   default = 3
 }
 
+variable "instance_ssh_key_name" {
+  type = string
+  description = "Specify the SSH key name to use (that's already present in AWS)"
+  default = ""
+}
+
+# TODO: Add a check for existence
+variable "ssh_private_key_path" {
+  default = "~/.ssh/id_rsa"
+}
